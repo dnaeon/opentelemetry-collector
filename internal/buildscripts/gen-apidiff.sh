@@ -60,9 +60,6 @@ trap clean_up EXIT
 
 mkdir -p "$tmp_dir/$package"
 
-# XXX
-echo "running in $( pwd )"
-
 go tool -modfile "${tools_mod_file}" apidiff -w "$tmp_dir"/"$package"/apidiff.state "$package"
 
 # Copy files if not in dry-run mode.

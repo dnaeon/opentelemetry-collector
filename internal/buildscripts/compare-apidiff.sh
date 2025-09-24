@@ -44,9 +44,6 @@ fi
 
 set -e
 
-# XXX
-echo "running in $( pwd )"
-
 if [ -e "$input_dir"/"$package"/apidiff.state ]; then
   changes=$(go tool -modfile "${tools_mod_file}" apidiff "$input_dir"/"$package"/apidiff.state "$package")
   if [ -n "$changes" ] && [ "$changes" != " " ]; then
