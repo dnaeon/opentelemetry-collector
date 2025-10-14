@@ -42,7 +42,7 @@ if [ -z "$package" ]; then
   usage
 fi
 
-set -ex
+set -e
 
 if [ -e "$input_dir"/"$package"/apidiff.state ]; then
   changes=$(go tool -modfile "${tools_mod_file}" apidiff -allow-internal "$input_dir"/"$package"/apidiff.state "$package")
@@ -50,7 +50,7 @@ if [ -e "$input_dir"/"$package"/apidiff.state ]; then
     SUB='Incompatible changes:'
     if [ $check_only = true ] && [[ "$changes" =~ .*"$SUB".* ]]; then
       echo "Incompatible Changes Found."
-      echo "Check the logs in the GitHub Action log group: 'Compare-States'."
+      echo "Check the logs in the GitHub Action log group: 'Check-API-Compatibility'."
       exit 1
     else
       echo "Changes found in $package:"
