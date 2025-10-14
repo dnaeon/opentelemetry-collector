@@ -23,8 +23,8 @@ type portpair struct {
 // describing it. The port is available for opening when this function returns
 // provided that there is no race by some other code to grab the same port
 // immediately.
-func GetAvailableLocalAddress(tb testing.TB) string {
-	return findAvailable(tb, "tcp4")
+func GetAvailableLocalAddress(tb testing.TB) (string, error) {
+	return findAvailable(tb, "tcp4"), nil
 }
 
 // GetAvailableLocalIPv6Address is IPv6 version of GetAvailableLocalAddress.
