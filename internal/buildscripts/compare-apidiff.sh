@@ -42,10 +42,10 @@ if [ -z "$package" ]; then
   usage
 fi
 
-set -e
+set -ex
 
 if [ -e "$input_dir"/"$package"/apidiff.state ]; then
-  changes=$(go tool -modfile "${tools_mod_file}" apidiff "$input_dir"/"$package"/apidiff.state "$package")
+  changes=$(go tool -modfile "${tools_mod_file}" apidiff -allow-internal "$input_dir"/"$package"/apidiff.state "$package")
   if [ -n "$changes" ] && [ "$changes" != " " ]; then
     SUB='Incompatible changes:'
     if [ $check_only = true ] && [[ "$changes" =~ .*"$SUB".* ]]; then
